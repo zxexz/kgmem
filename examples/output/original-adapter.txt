@@ -1,0 +1,24 @@
+
+[hand-written graph]
+  Q: What is the capital of Velmora?                  memory: Drakenhold    base LM: Velmora is the capital of the Republic of Velmora.
+  Q: Which currency is used in Quistan?               memory: Orbek         base LM: The currency is the US dollar.
+  Q: Where does Talia live?                           memory: Pellin        base LM: She lives in the city of New York.
+  Q: In which country does Talia live?                memory: Velmora       base LM: In the United States.
+  Q: Where does the leader of Velmora live?           memory: Sorvik        base LM: He lives in the village of Velmora.
+  Q: Where does Talia's friend live?                  memory: Sorvik        base LM: She lives in a house in the city.
+
+[after editing two edges at inference time]
+  Q: What is the capital of Velmora?                  memory: Pellin        base LM: Velmora is the capital of the Republic of Velmora.
+  Q: Where does Talia live?                           memory: Sorvik        base LM: She lives in the city of New York.
+  Q: In which country does Talia live?                memory: Quistan       base LM: In the United States.
+
+[swapped to a fresh random world]
+  (gold: Marlin)  Q: Name the capital of the country containing Narzen. memory: Marlin        base LM: The capital of the country containing Narzen is Narzen.
+  (gold: Yulixny)  Q: Where does Fenstobo's friend live?               memory: Yulixny       base LM: He lives in the city of Kobayashi.
+  (gold: Pelad)  Q: Who leads Tormu?                                 memory: Pelad         base LM: The leader of the Tormu is the leader of the Tormu.
+  (gold: Bonymu)  Q: Where does the leader of Ethkaeth live?          memory: Bonymu        base LM: He lives in the village of Khek.
+  (gold: Bophamu)  Q: Where does the leader of Fendee live?            memory: Bophamu       base LM: He lives in the city of New York.
+
+[new session, no shared context; state loaded from memory_state.pt]
+  Q: What is kel?   memory: rice   (gold:rice)
+  Q: What is vom?   memory: tea   (gold:tea)

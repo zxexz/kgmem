@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "kgmem"
+version = "0.1.0"
+description = "Editable graph memory and a persistent scratchpad for frozen language models"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{name = "zxexz"}]
+dependencies = ["torch", "transformers", "accelerate"]
+
+[project.optional-dependencies]
+test = ["pytest", "numpy"]
+experiments = ["numpy", "scipy", "pyarrow", "datasets"]
+
+[project.urls]
+Repository = "https://github.com/zxexz/kgmem"
+Documentation = "https://github.com/zxexz/kgmem/tree/main/docs"
+
+[project.scripts]
+kgmem-inspect = "kgmem.inspector.server:main"
+
+[tool.setuptools.packages.find]
+include = ["kgmem*"]
+
+[tool.setuptools.package-data]
+"kgmem.inspector" = ["static/*.html", "static/*.css", "static/*.js"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

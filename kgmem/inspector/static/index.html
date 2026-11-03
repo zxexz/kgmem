@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>kgmem inspector</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header>
+  <h1>kgmem inspector</h1>
+  <span class="chip" id="model-chip"></span>
+  <span class="spacer"></span>
+  <label class="check">adapter <select id="adapter"></select></label>
+  <button class="ghost" id="theme" type="button" aria-label="Switch between light and dark theme">Theme</button>
+</header>
+
+<main>
+  <section class="card" id="card-prompt" aria-labelledby="h-run">
+    <h2 id="h-run">Prompt</h2>
+    <p class="sub"><b>Ask</b> generates an answer. <b>Remember</b> updates the saved scratchpad.
+      <b>Trace</b> inspects supplied text without generating. Run with Ctrl/⌘ + Enter.</p>
+    <div class="controls">
+      <div class="col">
+        <div class="seg" role="group" aria-label="Mode" id="mode">
+          <button type="button" data-mode="ask" aria-pressed="true">Ask</button>
+          <button type="button" data-mode="remember" aria-pressed="false">Remember</button>
+          <button type="button" data-mode="trace" aria-pressed="false">Trace</button>
+        </div>
+        <select id="presets" aria-label="Example prompts"></select>
+      </div>
+      <textarea id="prompt" spellcheck="false" aria-label="Prompt text"></textarea>
+      <div class="col">
+        <label class="check"><input type="checkbox" id="use-memory" checked> memory on</label>
+        <label class="check"><input type="checkbox" id="persist"> start from the persistent scratchpad</label>
+        <label class="check"><input type="checkbox" id="compare" checked> also answer without the memory</label>
+      </div>
+      <div class="col">
+        <label class="check">max new tokens <input type="number" id="max-new" value="24" min="1" max="64"></label>
+        <button class="primary" id="run" type="button">Run</button>
+        <button class="ghost" id="tour-start" type="button">Step through</button>
+      </div>
+    </div>
+    <div class="answers" id="answers" style="margin-top:12px"></div>
+    <div class="notes" id="notes"></div>
+    <div class="status" id="status" role="status" aria-live="polite"></div>
+  </section>
+
+  <section class="tour" id="tour" aria-live="polite" aria-label="Trace steps"></section>
+
+  <section class="card" id="card-diagram" aria-labelledby="h-dia">
+    <h2 id="h-dia">Memory block</h2>
+    <p class="sub">The frozen model has one trainable memory block. Select a component to inspect it below.</p>
+    <div id="diagram"></div>
+    <details><summary>Glossary</summary><dl class="glossary" id="glossary"></dl></details>
+  </section>
+
+  <section class="card" id="card-timeline" aria-labelledby="h-tl">
+    <h2 id="h-tl">Token timeline</h2>
+    <p class="sub">Select a token, or focus the timeline and use ← →. Bold tokens were generated; arcs show attention.
+      Each lane names its scale. Memory effect uses a signed scale centered at zero.</p>
+    <div class="legend" id="tl-legend"></div>
+    <div class="tl-tools" id="tl-tools"></div>
+    <div id="overview-wrap"></div>
+    <div class="timeline" id="timeline" tabindex="0" role="group" aria-label="Token timeline. Use the left and right arrow keys to move between positions." aria-describedby="summary"></div>
+    <div class="summary" id="summary" aria-live="polite"></div>
+    <details><summary>Timeline as a table</summary><div class="table-scroll" id="tl-table"></div></details>
+  </section>
+
+  <section class="grid2" aria-label="The selected position, step by step">
+    <div class="card" id="card-link"></div>
+    <div class="card" id="card-traversal"></div>
+  </section>
+  <section class="grid2" aria-label="The selected position, continued">
+    <div class="card" id="card-pad-pos"></div>
+    <div class="card" id="card-next"></div>
+  </section>
+
+  <section class="grid2">
+    <div class="card" id="card-pad"></div>
+    <div class="card" id="card-memory"></div>
+  </section>
+
+  <section class="grid2">
+    <div class="card" id="card-graph"></div>
+    <div class="card" id="card-arch"></div>
+  </section>
+</main>
+<div id="tooltip" aria-hidden="true"></div>
+<script src="/app.js"></script>
+</body>
+</html>
